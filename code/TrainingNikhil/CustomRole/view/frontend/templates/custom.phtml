@@ -1,0 +1,26 @@
+<?php $objectmanager = \Magento\Framework\App\ObjectManager::getInstance();
+
+
+
+
+
+
+
+
+
+$registry = $objectmanager->get('\Magento\Framework\Registry');
+$currentProduct = $registry->registry('current_product');
+// $existingMediaGalleryEntries = $currentProduct->getMediaGalleryEntries();
+// foreach ($existingMediaGalleryEntries as $entry) {
+//      print_r($entry->getTypes());
+//   }
+
+
+  $helperImport = $objectmanager->get('\Magento\Catalog\Helper\Image');
+
+$imageUrl = $helperImport->init($currentProduct, 'new_role')
+                ->setImageFile($currentProduct->getSmallImage()) // image,small_image,thumbnail
+                ->resize(380)
+                ->getUrl();
+ echo "<img src = ".$imageUrl. " height=100 width=100 />";
+?>
